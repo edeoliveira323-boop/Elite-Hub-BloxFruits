@@ -1,0 +1,38 @@
+-- [[ SCRIPT TESTE SIMPLIFICADO 2026 ]]
+print("Iniciando carregamento do script...")
+
+-- Tenta carregar a interface com tratamento de erro
+local success, Rayfield = pcall(function()
+    return loadstring(game:HttpGet('raw.githubusercontent.com'))()
+end)
+
+if not success or not Rayfield then
+    warn("ERRO: A Interface Rayfield não carregou. Verifique sua internet.")
+    return
+end
+
+-- Configurações
+getgenv().Config = {
+    AutoFarm = false
+}
+
+-- Criando Janela
+local Window = Rayfield:CreateWindow({
+   Name = "Elite Hub | Teste",
+   LoadingTitle = "Carregando...",
+   ConfigurationSaving = { Enabled = false }
+})
+
+local Tab = Window:CreateTab("Teste", 4483362458)
+
+Tab:CreateToggle({
+   Name = "Ativar Log de Teste",
+   CurrentValue = false,
+   Callback = function(Value)
+      getgenv().Config.AutoFarm = Value
+      print("Status do Farm: ", Value)
+   end,
+})
+
+print("Script carregado com sucesso!")
+Rayfield:Notify({Title = "Sucesso", Content = "Script Pronto", Duration = 5})
